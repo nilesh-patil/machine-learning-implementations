@@ -1,0 +1,22 @@
+[workspace]
+authors = ["Nilesh <nilesh-patil@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "machine-learning-implementations"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.12.7"
+
+[pypi-dependencies]
+pandas = ">=2.2.3, <3"
+scikit-learn = ">=1.6.1, <2"
+seaborn = ">=0.13.2, <0.14"
+numpy = ">=2.2.5, <3"
+scipy = ">=1.15.2, <2"
+matplotlib = ">=3.10.3, <4"
+uv = ">=0.7.2, <0.8"
+ray = { version = ">=2.45.0, <3", extras = ["all"] }
+altair = { version = ">=5.5.0, <6", extras = ["all"] }

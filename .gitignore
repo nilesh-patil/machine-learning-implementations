@@ -1,2 +1,5 @@
 .ipynb_checkpoints/
 config.sh
+# pixi environments
+.pixi
+*.egg-info
