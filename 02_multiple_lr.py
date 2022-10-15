@@ -28,14 +28,20 @@ def multiple_linear_regression(X, y):
 
     # Calculate theta using the Normal Equation: theta = (X^T * X)^(-1) * X^T * y [1, 2, 3]
 
-    # Calculate (X^T * X)
-    xtx = np.dot(X_b.T, X_b)
-    # Calculate the inverse of (X^T * X)
-    xtx_inv = np.linalg.inv(xtx)
-    # Calculate X^T * y
-    xty = np.dot(X_b.T, y)
-    # Calculate theta
-    theta = np.dot(xtx_inv, xty)
+    try:
+        # Calculate (X^T * X)
+        xtx = np.dot(X_b.T, X_b)
+        # Calculate the inverse of (X^T * X)
+        xtx_inv = np.linalg.inv(xtx)
+        # Calculate X^T * y
+        xty = np.dot(X_b.T, y)
+        # Calculate theta
+        theta = np.dot(xtx_inv, xty)
+    except np.linalg.LinAlgError:
+        # Handle cases where the matrix is singular (cannot be inverted)
+        print("Error: Matrix (X^T * X) is singular and cannot be inverted.")
+        print("This might happen if features are perfectly correlated or if n_features >= n_samples.")
+        theta = None
 
     return(theta)
 
