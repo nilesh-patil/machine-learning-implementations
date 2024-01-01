@@ -15,8 +15,6 @@ This is in no way meant to be a comprehensive catalogue or implementation of the
     - Decision Trees
     - Random Forest
     - GBT
+    - SVMs
     - Perceptron  
     - Neural Networks  
-    - SVMs 
-
-
