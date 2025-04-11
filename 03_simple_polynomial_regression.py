@@ -64,3 +64,51 @@ def polynomial_regression(x, y, degree):
         theta = None
 
     return(theta)
+
+
+# --- Example Usage ---
+
+# Sample data with a non-linear (quadratic) relationship
+np.random.seed(0) # for reproducibility
+x_data = np.linspace(-3, 3, 100)
+# y = 0.5 * x^2 + x + 2 + noise
+y_data = 0.5 * x_data**2 + x_data + 2 + np.random.randn(100) * 1.5
+
+# Choose the degree of the polynomial
+poly_degree = 2
+
+# Calculate coefficients (theta)
+theta = polynomial_regression(x_data, y_data, poly_degree)
+
+if theta is not None:
+    print(f"Calculated Theta (Intercept and Coefficients for degree {poly_degree}):\n{theta}")
+
+    intercept = theta[0][0]
+    coefficients = theta[1:].flatten()
+
+    print(f"\nIntercept (b0): {intercept:.4f}")
+    for i, coef in enumerate(coefficients):
+        print(f"Coefficient for x^{i+1} (b{i+1}): {coef:.4f}")
+
+    # --- Optional: Make predictions and visualize ---
+
+    # To predict, create the polynomial feature matrix including the intercept term
+    X_data_poly_features = create_polynomial_features(x_data, poly_degree)
+    X_data_b = np.c_[np.ones((len(X_data_poly_features), 1)), X_data_poly_features]
+
+    y_pred = np.dot(X_data_b, theta)
+
+    # Sort values for plotting the curve smoothly
+    sort_axis = np.argsort(x_data)
+    x_data_sorted = x_data[sort_axis]
+    y_pred_sorted = y_pred[sort_axis]
+
+    # Plot the original data and the polynomial regression curve [4]
+    plt.scatter(x_data, y_data, color='blue', label='Actual Data Points', s=10)
+    plt.plot(x_data_sorted, y_pred_sorted, color='red', label=f'Polynomial Regression (Degree {poly_degree})')
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("Polynomial Regression (NumPy from Scratch)")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
